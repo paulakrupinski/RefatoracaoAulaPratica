@@ -1,25 +1,25 @@
 public class Main {
     public static void main(String[] args) {
 
-        // Criando filmes
-        Movie filme1 = new Movie("Matrix", Movie.REGULAR);
-        Movie filme2 = new Movie("Frozen", Movie.CHILDRENS);
-        Movie filme3 = new Movie("Vingadores: Ultimato", Movie.NEW_RELEASE);
+        
+        Movie m1 = new Movie("Carros", Movie.CHILDRENS);
+        Movie m2 = new Movie("Vingadores", Movie.NEW_RELEASE);
+        Movie m3 = new Movie("Matrix", Movie.REGULAR);
 
-        // Criando aluguéis (Rental)
-        Rental aluguel1 = new Rental(filme1, 3); // 3 dias
-        Rental aluguel2 = new Rental(filme2, 4); // 4 dias
-        Rental aluguel3 = new Rental(filme3, 2); // 2 dias
+       
+        Rental r1 = new Rental(m1, 4); 
+        Rental r2 = new Rental(m2, 3); 
+        Rental r3 = new Rental(m3, 1); 
 
-        // Criando cliente
+       
         Customer cliente = new Customer("Paula");
 
-        // Adicionando aluguéis ao cliente
-        cliente.addRental(aluguel1);
-        cliente.addRental(aluguel2);
-        cliente.addRental(aluguel3);
+       
+        cliente.addRental(r1);
+        cliente.addRental(r2);
+        cliente.addRental(r3);
 
-        // Gerando relatório
+        
         System.out.println(cliente.statement());
     }
 }

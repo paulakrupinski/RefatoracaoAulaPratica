@@ -1,51 +1,47 @@
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
 
-public class Customer {
-    private String _name;
-    private Vector _rentals = new Vector();
+class Customer {
+    private String name;
+    private List<Rental> rentals = new ArrayList<>();
 
     public Customer(String name) {
-        _name = name;
+        this.name = name;
     }
 
-    public void addRental(Rental arg) {
-        _rentals.addElement(arg);
-    }
-
-    public String getName() {
-        return _name;
+    public void addRental(Rental rental) {
+        rentals.add(rental);
     }
 
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
-        Enumeration rentals = _rentals.elements();
-        String result = "Rental Record for " + getName() + "\n";
+        double totalAmount = 0; // total a pagar
+        int frequentRenterPoints = 0; // pontos do cliente
+        StringBuilder result = new StringBuilder("Registro de Aluguel para " + getName() + "\n");
 
-        while (rentals.hasMoreElements()) {
-            Rental each = (Rental) rentals.nextElement();
+        for (Rental each : rentals) {
+            
+            double thisAmount = each.getCharge();
 
-            // adiciona pontos de cliente frequente
-            frequentRenterPoints++;
+          
+            frequentRenterPoints += each.getFrequentRenterPoints();
 
-            // bônus para lançamento novo alugado por mais de um dia
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-                    each.getDaysRented() > 1)
-                frequentRenterPoints++;
+            
+            result.append("\t")
+                  .append(each.getMovie().getTitle())
+                  .append("\t")
+                  .append(thisAmount)
+                  .append("\n");
 
-            // mostra valores para este aluguel
-            result += "\t" + each.getMovie().getTitle() + "\t" +
-                    String.valueOf(each.getCharge()) + "\n";
-
-            totalAmount += each.getCharge();
+            totalAmount += thisAmount;
         }
 
-        // linhas de rodapé
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) +
-                " frequent renter points";
+        result.append("Valor devido é ").append(totalAmount).append("\n");
+        result.append("Você ganhou ").append(frequentRenterPoints).append(" pontos de fidelidade");
 
-        return result;
+        return result.toString();
+    }
+
+    public String getName() {
+        return name;
     }
 }
