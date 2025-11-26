@@ -1,25 +1,19 @@
 public class Main {
     public static void main(String[] args) {
 
-        
-        Movie m1 = new Movie("Carros", Movie.CHILDRENS);
+        Movie m1 = new Movie("Matrix", Movie.REGULAR);
         Movie m2 = new Movie("Vingadores", Movie.NEW_RELEASE);
-        Movie m3 = new Movie("Matrix", Movie.REGULAR);
+        Movie m3 = new Movie("Toy Story", Movie.CHILDRENS);
 
-       
-        Rental r1 = new Rental(m1, 4); 
-        Rental r2 = new Rental(m2, 3); 
-        Rental r3 = new Rental(m3, 1); 
+        Rental r1 = new Rental(m1, 3);
+        Rental r2 = new Rental(m2, 2);
+        Rental r3 = new Rental(m3, 4);
 
-       
-        Customer cliente = new Customer("Paula");
+        Customer c = new Customer("Paula");
+        c.addRental(r1);
+        c.addRental(r2);
+        c.addRental(r3);
 
-       
-        cliente.addRental(r1);
-        cliente.addRental(r2);
-        cliente.addRental(r3);
-
-        
-        System.out.println(cliente.statement());
+        System.out.println(c.statement());
     }
 }

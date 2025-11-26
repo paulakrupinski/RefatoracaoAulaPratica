@@ -1,7 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
 
-class Customer {
+public class Customer {
+
     private String name;
     private List<Rental> rentals = new ArrayList<>();
 
@@ -13,35 +14,49 @@ class Customer {
         rentals.add(rental);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String statement() {
-        double totalAmount = 0; // total a pagar
-        int frequentRenterPoints = 0; // pontos do cliente
-        StringBuilder result = new StringBuilder("Registro de Aluguel para " + getName() + "\n");
+
+        StringBuilder result = new StringBuilder("Registro de Aluguéis de " + getName() + "\n");
 
         for (Rental each : rentals) {
-            
-            double thisAmount = each.getCharge();
-
-          
-            frequentRenterPoints += each.getFrequentRenterPoints();
-
-            
+           
             result.append("\t")
                   .append(each.getMovie().getTitle())
                   .append("\t")
-                  .append(thisAmount)
+                  .append(each.getCharge())
                   .append("\n");
-
-            totalAmount += thisAmount;
         }
 
-        result.append("Valor devido é ").append(totalAmount).append("\n");
-        result.append("Você ganhou ").append(frequentRenterPoints).append(" pontos de fidelidade");
+        
+        result.append("Valor total devido: ")
+              .append(getTotalCharge())
+              .append("\n");
+
+        result.append("Pontos conquistados: ")
+              .append(getTotalFrequentRenterPoints());
 
         return result.toString();
     }
 
-    public String getName() {
-        return name;
+   
+    private double getTotalCharge() {
+        double result = 0;
+        for (Rental each : rentals) {
+            result += each.getCharge();
+        }
+        return result;
+    }
+
+    
+    private int getTotalFrequentRenterPoints() {
+        int result = 0;
+        for (Rental each : rentals) {
+            result += each.getFrequentRenterPoints();
+        }
+        return result;
     }
 }
