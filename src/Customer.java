@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 import java.util.Vector;
 
 public class Customer {
@@ -20,7 +17,6 @@ public class Customer {
         return name;
     }
 
-    
     public String statement() {
         return new TextStatement().value(this);
     }
@@ -29,9 +25,9 @@ public class Customer {
         return new HtmlStatement().value(this);
     }
 
-    
-    public Enumeration getRentals() {
-        return rentals.elements();
+    // CORRIGIDO — retorna o Vector diretamente
+    public Vector<Rental> getRentals() {
+        return rentals;
     }
 
     public double getTotalCharge() {
