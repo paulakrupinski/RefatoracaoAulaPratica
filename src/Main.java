@@ -1,29 +1,14 @@
 public class Main {
     public static void main(String[] args) {
-     
-        Movie movie1 = new Movie("O Poderoso Chefão", Movie.REGULAR);
-        Movie movie2 = new Movie("Frozen", Movie.CHILDRENS);
-        Movie movie3 = new Movie("Homem-Aranha: Sem Volta Para Casa", Movie.NEW_RELEASE);
 
-       
-        Rental rental1 = new Rental(movie1, 3); // 3 dias
-        Rental rental2 = new Rental(movie2, 4); // 4 dias
-        Rental rental3 = new Rental(movie3, 2); // 2 dias
+        Movie regular = new Movie("Filme Regular", Movie.REGULAR);
+        Movie childrens = new Movie("Filme Infantil", Movie.CHILDRENS);
+        Movie newRelease = new Movie("Lançamento", Movie.NEW_RELEASE);
 
-        
-        Customer customer = new Customer("Paula");
+        System.out.println("=== Teste da Refatoração (getCharge movido para Price) ===");
 
-     
-        customer.addRental(rental1);
-        customer.addRental(rental2);
-        customer.addRental(rental3);
-
-       
-        System.out.println("===== Declaração em Texto =====");
-        System.out.println(customer.statement());
-
-       
-        System.out.println("\n===== Declaração em HTML =====");
-        System.out.println(customer.htmlStatement());
+        System.out.println("Regular (3 dias): " + regular.getCharge(3));        // Esperado: 3.5
+        System.out.println("Infantil (4 dias): " + childrens.getCharge(4));     // Esperado: 3.0
+        System.out.println("Lançamento (2 dias): " + newRelease.getCharge(2));  // Esperado: 6.0
     }
 }
